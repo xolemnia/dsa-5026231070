@@ -1,2 +1,4 @@
 - Prefers explicit package declarations in Java over the default package. Confidence: 0.8
 - Prefers clean directory structures without redundant nesting; source folders should align directly with package names (e.g., `src/lw01/prelab/` for `package lw01.prelab;`), avoiding duplicated path segments like `src/lw01/prelab/lw01/prelab/`. Confidence: 0.9
+- Prefers communicating in casual/colloquial Indonesian. Confidence: 0.8
+- Prefers using the terminal/command line for Git operations (pushing, configuring) rather than IDE graphical tools. Confidence: 0.7
