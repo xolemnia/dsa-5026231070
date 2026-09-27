@@ -9,7 +9,6 @@ public class BankTransaction {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        // Step 1: Read and store transactions in a LinkedList
         LinkedList<String[]> transactionsList = new LinkedList<>();
         Scanner scanner = new Scanner(new File("transactions.txt"));
         while (scanner.hasNextLine()) {
@@ -21,7 +20,6 @@ public class BankTransaction {
         }
         scanner.close();
 
-        // Step 2: Create customer data in another LinkedList
         LinkedList<String[]> customers = new LinkedList<>();
         for (String[] txn : transactionsList) {
             String name = txn[0];
@@ -38,7 +36,6 @@ public class BankTransaction {
             }
         }
 
-        // Step 3: Move transactions from LinkedList to Queue and process
         Queue<String[]> transactionQueue = new LinkedList<>();
         for (String[] txn : transactionsList) {
             transactionQueue.offer(txn);
@@ -52,7 +49,6 @@ public class BankTransaction {
             String type = txn[1];
             int amount = Integer.parseInt(txn[2]);
 
-            // Find customer in the list
             for (String[] cust : customers) {
                 if (cust[0].equals(name)) {
                     int balance = Integer.parseInt(cust[1]);
@@ -61,7 +57,6 @@ public class BankTransaction {
                         cust[1] = String.valueOf(balance + amount);
                     } else if ("WITHDRAW".equals(type)) {
                         if (amount > balance) {
-                            // Failed withdrawal - push to stack
                             failedStack.push(txn);
                         } else {
                             cust[1] = String.valueOf(balance - amount);
@@ -72,13 +67,11 @@ public class BankTransaction {
             }
         }
 
-        // Step 5: Display final balances
         System.out.println("=== Final Balances ===");
         for (String[] cust : customers) {
             System.out.println(cust[0] + " : " + cust[1]);
         }
 
-        // Step 6: Display failed transactions (LIFO order from stack)
         System.out.println("\n=== Failed Transactions ===");
         while (!failedStack.isEmpty()) {
             String[] txn = failedStack.pop();
